@@ -1,4 +1,4 @@
-﻿]namespace StudentWebApi.Models
+﻿namespace StudentWebApi.Models
 {
     public enum Gender
     {
