@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -23,8 +22,7 @@ namespace StudentWebApi.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     Gender = table.Column<int>(type: "integer", nullable: false),
                     DepartmentId = table.Column<int>(type: "integer", nullable: false),
-                    PhotoPath = table.Column<string>(type: "text", nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    PhotoPath = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,8 +31,8 @@ namespace StudentWebApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Students",
-                columns: new[] { "Id", "DateOfBirth", "DepartmentId", "Email", "FirstName", "Gender", "LastName", "PhotoPath" },
-                values: new object[] { 1, new DateTime(1000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "SomeEmail@gmail.com", "German", 2, "Gritsenko", "Images/Sam.png" });
+                columns: new[] { "Id", "DepartmentId", "Email", "FirstName", "Gender", "LastName", "PhotoPath" },
+                values: new object[] { 1, 1, "SomeEmail@gmail.com", "German", 2, "Gritsenko", "Images/Sam.png" });
         }
 
         /// <inheritdoc />

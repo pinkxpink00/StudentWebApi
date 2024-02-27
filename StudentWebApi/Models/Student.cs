@@ -10,6 +10,6 @@ namespace StudentWebApi.Models
         public Gender Gender { get; set; }
         public int DepartmentId { get; set; }
         public string PhotoPath { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        
     }
 }
