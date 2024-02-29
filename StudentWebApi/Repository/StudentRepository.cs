@@ -30,14 +30,14 @@ namespace StudentWebApi.Repository
             }
         }
 
-        public Task<Student> GetStudend(int id)
+        public async Task<Student> GetStudend(int id)
         {
-            throw new NotImplementedException();
+             return await appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<Student> GetStudentByEmail(string email)
+        public async Task<Student> GetStudentByEmail(string email)
         {
-            throw new NotImplementedException();
+            return await appDbContext.Students.FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public Task<IEnumerable<Student>> GetStudents()
