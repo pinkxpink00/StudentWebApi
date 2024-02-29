@@ -40,14 +40,27 @@ namespace StudentWebApi.Repository
             return await appDbContext.Students.FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public Task<IEnumerable<Student>> GetStudents()
+        public async Task<IEnumerable<Student>> GetStudents()
         {
-            throw new NotImplementedException();
+            return await appDbContext.Students.ToListAsync();
         }
 
-        public Task<IEnumerable<Student>> Search(string name, Gender? gender)
+        public async Task<IEnumerable<Student>> Search(string name, Gender? gender)
         {
-            throw new NotImplementedException();
+            IQueryable<Student> query = appDbContext.Students;
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(e=>e.FirstName.Contains(name)
+                || e.LastName.Contains(name));
+            }
+
+            if (gender != null)
+            {
+                query = query.Where(e => e.Gender == gender);
+            }
+
+            return await query.ToListAsync();
         }
 
         public Task<Student> UpdateStudent(Student student)
