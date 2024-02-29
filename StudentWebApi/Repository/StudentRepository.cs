@@ -1,4 +1,5 @@
-﻿using StudentWebApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentWebApi.Data;
 using StudentWebApi.Models;
 
 namespace StudentWebApi.Repository
@@ -18,9 +19,15 @@ namespace StudentWebApi.Repository
             return result.Entity;
         }
 
-        public Task<Student> DeleteStudent(int id)
+        public async Task DeleteStudent(int id)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(result != null)
+            {
+                appDbContext.Students.Remove(result);
+                await appDbContext.SaveChangesAsync();
+            }
         }
 
         public Task<Student> GetStudend(int id)
