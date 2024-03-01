@@ -32,7 +32,7 @@ namespace StudentWebApi.Repository
             return result;
         }
 
-        public async Task<Student> GetStudend(int id)
+        public async Task<Student> GetStudent(int id)
         {
              return await appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
         }

@@ -5,7 +5,7 @@ namespace StudentWebApi.Repository
     public interface IStudentRepository
     {
         Task<IEnumerable<Student>> Search (string name,Gender? gender);
-        Task<Student> GetStudend(int id);
+        Task<Student> GetStudent(int id);
         Task<IEnumerable<Student>> GetStudents();
         Task<Student> GetStudentByEmail (string email);
         Task<Student> AddStudent (Student student);
