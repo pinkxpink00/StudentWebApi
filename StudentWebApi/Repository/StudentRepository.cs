@@ -19,7 +19,7 @@ namespace StudentWebApi.Repository
             return result.Entity;
         }
 
-        public async Task DeleteStudent(int id)
+        public async Task<Student> DeleteStudent(int id)
         {
             var result = await appDbContext.Students.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -28,6 +28,8 @@ namespace StudentWebApi.Repository
                 appDbContext.Students.Remove(result);
                 await appDbContext.SaveChangesAsync();
             }
+
+            return result;
         }
 
         public async Task<Student> GetStudend(int id)
@@ -63,9 +65,28 @@ namespace StudentWebApi.Repository
             return await query.ToListAsync();
         }
 
-        public Task<Student> UpdateStudent(Student student)
+        public async Task<Student> UpdateStudent(Student student)
         {
-            throw new NotImplementedException();
+            var result = await appDbContext.Students.FirstOrDefaultAsync(e => e.Id == student.Id);
+
+            if(result != null)
+            {
+                result.FirstName = student.FirstName;
+                result.LastName = student.LastName;
+                result.Gender = student.Gender;
+                result.Email = student.Email;
+                if (student.DepartmentId != 0)
+                {
+                    result.DepartmentId = student.DepartmentId;
+                }
+                result.PhotoPath = student.PhotoPath;
+
+                await appDbContext.SaveChangesAsync();
+
+                return result;
+            }
+
+            return null;
         }
     }
 }
