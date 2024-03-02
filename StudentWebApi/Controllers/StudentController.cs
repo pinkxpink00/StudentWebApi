@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using StudentWebApi.Models;
 using StudentWebApi.Repository;
 
@@ -9,10 +10,12 @@ namespace StudentWebApi.Controllers
     public class StudentController : Controller
     {
         private readonly IStudentRepository studentRepository;
+        private readonly ILogger logger;
 
-        public StudentController(IStudentRepository studentRepository)
+        public StudentController(IStudentRepository studentRepository, ILogger<StudentController>logger)
         {
             this.studentRepository = studentRepository;
+            this.logger = logger;
         }
 
         [HttpGet("Search")]
@@ -39,7 +42,9 @@ namespace StudentWebApi.Controllers
         {
             try
             {
+                logger.LogInformation("GetStudent was work");
                 return Ok(await studentRepository.GetStudents());
+                
             }
             catch (Exception)
             {
